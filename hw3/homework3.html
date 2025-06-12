@@ -1,0 +1,31 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <script src="../aframe/aframe.min.js"></script>
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+  </head>
+  <body>        
+     <a-scene vr-mode-ui="enabled: false;"
+              renderer="logarithmicDepthBuffer: true;"
+              embedded
+              arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false; debug: false;"> 
+     
+      <a-marker preset="hiro">
+       <a-entity rotation="-90 0 0" scale="0.2 0.2 0.2" position="0 3 -5">
+        <a-torus position="-2 1 -5" color="green" radius="1.2" animation="property: components.material.material.color; type: color; from: green; to: red; loop: true; dur: 10000"></a-torus>
+        <a-plane src="https://raw.githubusercontent.com/aframevr/sample-assets/master/assets/images/illustration/758px-Canestra_di_frutta_(Caravaggio).jpg" width="7" height="7" rotation="-55 0 0" position="-2 -2 -5" color="purple"></a-plane>
+        <a-cylinder color="yellow" height="2" radius="0.05" position="-2 -1 -5"></a-cylinder>
+        <a-cylinder color="blue" height="2" radius="0.05" position="-3 -1 -5"></a-cylinder>
+        <a-torus-knot color="orange" radius="1.2" position="-3 1 -5" animation="property: rotation; to: 0 0 360; loop: true; dur: 10000"></a-torus-knot>
+        <a-plane src="https://raw.githubusercontent.com/aframevr/sample-assets/master/assets/images/uvgrid/UV_Grid_Sm.jpg" width="9" height="2" position="3 1 -9"></a-plane>
+        <a-text value="Вiтаємо у браузернiй VR!" color="black" width="10" position="-0.5 1 -6" font="segoescb-msdf.json" negate="false"></a-text>
+        <a-text value="Корнілова" color="black" width="10" position="-0.5 1.5 -6" font="segoescb-msdf.json" negate="false" animation="property:position; to: 0.5 1.5 -40; loop:true; dur:20000">
+        </a-text>
+        <a-obj-model src="https://raw.githubusercontent.com/aframevr/assets/master/test-models/models/crate/crate.obj" mtl="https://raw.githubusercontent.com/aframevr/assets/master/test-models/models/crate/crate.mtl" position="2.5 -0.5 -5"></a-obj-model>
+        <a-gltf-model src="https://raw.githubusercontent.com/aframevr/assets/master/test-models/models/glTF-2.0/brainstem/BrainStem.gltf" position="0 185 0"></a-gltf-model>
+       </a-entity>
+      </a-marker>
+    <a-scene>
+  </body>
+</html>
