@@ -98,7 +98,7 @@
 			}
 			if(markerVisible["A"] && markerVisible["C"]) {
 				let distance = coord["A"].distanceTo( coord["C"] ); 
-				AC.lookAt( coord["B"] );
+				AC.lookAt( coord["C"] );
 				cAC.scale.set(1,1,distance);
 				cAC.visible = true;
 				console.log("AC");
@@ -144,19 +144,19 @@
 				const pp_ABC = (lenAB + lenBC + lenAC)/2;
 				const pp_BCD = (lenBC + lenCD + lenBD)/2;
 				const pp_CDA = (lenCD + lenAD + lenAC)/2;
-				const pp_DAB = (lenAB + lenBD + lenAD)/2;				
+				const pp_ABD = (lenAB + lenBD + lenAD)/2;				
 
 
 				const S_ABC = Math.sqrt((pp_ABC-lenAB)*(pp_ABC-lenBC)*(pp_ABC-lenAC));
-				const S_BCD = Math.sqrt((pp_ABD-lenBC)*(pp_ABD-lenCD)*(pp_ABD-lenBD));
+				const S_BCD = Math.sqrt((pp_BCD-lenBC)*(pp_BCD-lenCD)*(pp_BCD-lenBD));
 				const S_CDA = Math.sqrt((pp_CDA-lenCD)*(pp_CDA-lenAD)*(pp_CDA-lenAC));
 				const S_ABD = Math.sqrt((pp_ABD-lenAB)*(pp_ABD-lenBD)*(pp_ABD-lenAD));
 			
 				const PS = document.getElementById("PS");
       				PS.setAttribute("value",
-                                    "P(ABCD)=" + perimeter + "\n" +
+                                    "P(ABCD)=" + P + "\n" +
         			    "S(ABC)=" + S_ABC + " S(BCD)=" + S_BCD + "\n" +
-        		            "S(CDA)=" + S_CDA + " S(DAB)=" + S_DAB
+        		            "S(CDA)=" + S_CDA + " S(ABD)=" + S_ABD
                                 );     
 			}	
 	 	}
