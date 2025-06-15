@@ -1,20 +1,33 @@
 <!DOCTYPE html>
 <html>
 <head>
-		<title>AR.js A-Frame Location-based</title>
-		<script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
-		<script  src="https://raw.githack.com/AR-js-org/AR.js/3.4.5/three.js/build/ar-threex-location-only.js"></script>
-		<script  src="https://raw.githack.com/AR-js-org/AR.js/3.4.5/aframe/build/aframe-ar.js"></script>
+		<meta charset="utf-8">
+		<style>
+			html, body { 
+				margin: 0; 
+				width: 100%;
+				height: 100%;
+				overflow: hidden;
+				position: relative;
+			}
+		</style>
+		<script type="importmap">
+		  {
+		    "imports": {
+		      "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+		      "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/",
+		      "mindar":"https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-face-three.prod.js",
+		      "gps": "ar-threex-location-only.js"
+		    }
+		  }
+		</script>
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+<script src="ar-threex-location-only.js"></script>		
+
+		<script src="homework12.js"></script>
 </head>
 <body>
-	<a-scene arjs>
-		<a-camera gps-new-camera></a-camera>
-
-		<a-entity material="color: yellow" geometry="primitive: box" gps-new-entity-place="latitude: 47.90722541960775; longitude: 33.41434100776076" scale="0.5 0.5 0.5"></a-entity>
-
-		 <a-entity material="color: blue" geometry="primitive: box" gps-new-entity-place="latitude: 47.907201899813344; longitude: 33.414527605330356" scale="0.5 0.5 0.5"></a-entity>
-		 <a-entity material="color: green" geometry="primitive: box" gps-new-entity-place="latitude:  47.90728429365417; longitude: 33.41439247254211" scale="0.5 0.5 0.5"></a-entity>
-		 
-		</a-scene>
+	<video id="video1" autoplay playsinline style="display: none;"></video>
 </body>
 </html>
