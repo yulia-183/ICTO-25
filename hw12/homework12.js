@@ -101,15 +101,27 @@ document.addEventListener("DOMContentLoaded", () => {
         camera.updateProjectionMatrix();
     }
 
-    function setupObjects(longitude, latitude) {
-    	const boxMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });
-   	 const sphereMaterial = new THREE.MeshBasicMaterial({ color: 0x0000ff });
+function setupObjects(longitude, latitude) {
+    // Додаємо світло
+    const light = new THREE.DirectionalLight(0xffffff, 1);
+    light.position.set(0, 100, 100).normalize();
+    scene.add(light);
 
-   	 const box = new THREE.Mesh(new THREE.BoxGeometry(20, 20, 20), boxMaterial);
-   	 const sphere = new THREE.Mesh(new THREE.SphereGeometry(10, 32, 32), sphereMaterial);
+    const ambient = new THREE.AmbientLight(0x404040); // мʼяке фонове світло
+    scene.add(ambient);
 
-   	 arjs.add(box, longitude - 0.001, latitude);   // Куб зліва
-  	  arjs.add(sphere, longitude + 0.001, latitude); // Сфера справа
-     }
+    // Створюємо обʼємні матеріали
+    const boxMaterial = new THREE.MeshStandardMaterial({ color: 0xff0000 }); // червоний куб
+    const sphereMaterial = new THREE.MeshStandardMaterial({ color: 0x0000ff }); // синя сфера
+
+    // Геометрія
+    const box = new THREE.Mesh(new THREE.BoxGeometry(20, 20, 20), boxMaterial);
+    const sphere = new THREE.Mesh(new THREE.SphereGeometry(10, 32, 32), sphereMaterial);
+
+    // Додаємо об'єкти у віртуальну сцену з GPS-привʼязкою
+    arjs.add(box, longitude - 0.001, latitude);   // Куб ліворуч
+    arjs.add(sphere, longitude + 0.001, latitude); // Сфера праворуч
+}
+     
     requestAnimationFrame(render);
 });
