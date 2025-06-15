@@ -101,9 +101,12 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function setupObjects(longitude, latitude) {
-    	const light = new THREE.DirectionalLight(0xffffff, 1);
-        light.position.set(0, 100, 100).normalize();
-        scene.add(light);
+         const ambientLight = new THREE.AmbientLight(0xffffff, 0.6); // мʼяке світло
+         scene.add(ambientLight);
+
+         const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8); // основне
+         directionalLight.position.set(100, 100, 100);
+         scene.add(directionalLight);
 	    
 	 const boxMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });
    	 const sphereMaterial = new THREE.MeshBasicMaterial({ color: 0x0000ff });
