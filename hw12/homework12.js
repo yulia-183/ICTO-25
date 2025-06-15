@@ -102,15 +102,25 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
      function setupObjects(longitude, latitude) {
-        const boxMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });
-        const sphereMaterial = new THREE.MeshBasicMaterial({ color: 0x0000ff });
+    // Додаємо світло в сцену
+   	 const ambientLight = new THREE.AmbientLight(0xffffff, 0.6); // м'яке біле світло
+   	 scene.add(ambientLight);
 
-        const box = new THREE.Mesh(new THREE.BoxGeometry(20, 20, 20), boxMaterial);
-        const sphere = new THREE.Mesh(new THREE.SphereGeometry(10, 32, 32), sphereMaterial);
+   	 const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8); // як сонце
+   	 directionalLight.position.set(100, 100, 100); // напрямок світла
+    	scene.add(directionalLight);
 
-        arjs.add(box, longitude - 0.001, latitude);   // Куб зліва
-        arjs.add(sphere, longitude + 0.001, latitude); // Сфера справа
-}
+    //  Куб зліва
+  	  const boxMaterial = new THREE.MeshStandardMaterial({ color: 0xff0000 }); // реагує на світло
+  	  const box = new THREE.Mesh(new THREE.BoxGeometry(20, 20, 20), boxMaterial);
+  	  arjs.add(box, longitude - 0.001, latitude);
+
+    //  Сфера справа
+	    const sphereMaterial = new THREE.MeshStandardMaterial({ color: 0x0000ff });
+ 	   const sphere = new THREE.Mesh(new THREE.SphereGeometry(10, 32, 32), sphereMaterial);
+	    arjs.add(sphere, longitude + 0.001, latitude);
+    }
+
      
     requestAnimationFrame(render);
 });
