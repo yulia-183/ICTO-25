@@ -102,16 +102,14 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function setupObjects(longitude, latitude) {
-        // Use position of first GPS update (fake or real)
-        const material = new THREE.MeshBasicMaterial({color: 0xff0000});
-        const material2 = new THREE.MeshBasicMaterial({color: 0xffff00});
-        const material3 = new THREE.MeshBasicMaterial({color: 0x0000ff});
-        const material4 = new THREE.MeshBasicMaterial({color: 0x00ff00});
-        arjs.add(new THREE.Mesh(geom, material), longitude, latitude + 0.001); // slightly north
-        arjs.add(new THREE.Mesh(geom, material2), longitude, latitude - 0.001); // slightly south
-        arjs.add(new THREE.Mesh(geom, material3), longitude - 0.001, latitude); // slightly west
-        arjs.add(new THREE.Mesh(geom, material4), longitude + 0.001, latitude); // slightly east
-    }
+    	const boxMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+   	 const sphereMaterial = new THREE.MeshBasicMaterial({ color: 0x0000ff });
 
+   	 const box = new THREE.Mesh(new THREE.BoxGeometry(20, 20, 20), boxMaterial);
+   	 const sphere = new THREE.Mesh(new THREE.SphereGeometry(10, 32, 32), sphereMaterial);
+
+   	 arjs.add(box, longitude - 0.001, latitude);   // Куб зліва
+  	  arjs.add(sphere, longitude + 0.001, latitude); // Сфера справа
+     }
     requestAnimationFrame(render);
 });
