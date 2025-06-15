@@ -101,32 +101,15 @@ document.addEventListener("DOMContentLoaded", () => {
         camera.updateProjectionMatrix();
     }
 
-function setupObjects(longitude, latitude) {
-    const loader = new THREE.GLTFLoader();
+     function setupObjects(longitude, latitude) {
+        const boxMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+        const sphereMaterial = new THREE.MeshBasicMaterial({ color: 0x0000ff });
 
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.6); // мʼяке світло
-    scene.add(ambientLight);
+        const box = new THREE.Mesh(new THREE.BoxGeometry(20, 20, 20), boxMaterial);
+        const sphere = new THREE.Mesh(new THREE.SphereGeometry(10, 32, 32), sphereMaterial);
 
-    const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8); // основне
-    directionalLight.position.set(100, 100, 100);
-    scene.add(directionalLight);
-    // КІТ (справа)
-    loader.load('cat.glb', function (gltf) {
-        const cat = gltf.scene;
-        cat.scene.scale.set(0.002, 0.002, 0.002);
-        arjs.add(cat, longitude + 0.001, latitude); // праворуч
-    }, undefined, function (error) {
-        console.error('Помилка завантаження моделі кота:', error);
-    });
-
-    // ПЕС (зліва)
-    loader.load('dog.glb', function (gltf) {
-        const dog = gltf.scene;
-        dog.scene.scale.set(0.15, 0.15, 0.15);
-        arjs.add(dog, longitude - 0.001, latitude); // ліворуч
-    }, undefined, function (error) {
-        console.error('Помилка завантаження моделі пса:', error);
-    });
+        arjs.add(box, longitude - 0.001, latitude);   // Куб зліва
+        arjs.add(sphere, longitude + 0.001, latitude); // Сфера справа
 }
      
     requestAnimationFrame(render);
