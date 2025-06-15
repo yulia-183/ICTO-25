@@ -102,25 +102,31 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 function setupObjects(longitude, latitude) {
-    // Додаємо світло
-    const light = new THREE.DirectionalLight(0xffffff, 1);
-    light.position.set(0, 100, 100).normalize();
-    scene.add(light);
+    const loader = new THREE.GLTFLoader();
 
-    const ambient = new THREE.AmbientLight(0x404040); // мʼяке фонове світло
-    scene.add(ambient);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.6); // мʼяке світло
+    scene.add(ambientLight);
 
-    // Створюємо обʼємні матеріали
-    const boxMaterial = new THREE.MeshStandardMaterial({ color: 0xff0000 }); // червоний куб
-    const sphereMaterial = new THREE.MeshStandardMaterial({ color: 0x0000ff }); // синя сфера
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8); // основне
+    directionalLight.position.set(100, 100, 100);
+    scene.add(directionalLight);
+    // КІТ (справа)
+    loader.load('cat.glb', function (gltf) {
+        const cat = gltf.scene;
+        cat.scene.scale.set(0.002, 0.002, 0.002);
+        arjs.add(cat, longitude + 0.001, latitude); // праворуч
+    }, undefined, function (error) {
+        console.error('Помилка завантаження моделі кота:', error);
+    });
 
-    // Геометрія
-    const box = new THREE.Mesh(new THREE.BoxGeometry(20, 20, 20), boxMaterial);
-    const sphere = new THREE.Mesh(new THREE.SphereGeometry(10, 32, 32), sphereMaterial);
-
-    // Додаємо об'єкти у віртуальну сцену з GPS-привʼязкою
-    arjs.add(box, longitude - 0.001, latitude);   // Куб ліворуч
-    arjs.add(sphere, longitude + 0.001, latitude); // Сфера праворуч
+    // ПЕС (зліва)
+    loader.load('dog.glb', function (gltf) {
+        const dog = gltf.scene;
+        dog.scene.scale.set(0.15, 0.15, 0.15);
+        arjs.add(dog, longitude - 0.001, latitude); // ліворуч
+    }, undefined, function (error) {
+        console.error('Помилка завантаження моделі пса:', error);
+    });
 }
      
     requestAnimationFrame(render);
